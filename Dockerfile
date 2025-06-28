@@ -1,13 +1,14 @@
 # start from a clean base image (replace <version> with the desired release)
 FROM runpod/worker-comfyui:5.1.0-base
 
-# install ffmpeg support via imageio
-RUN pip install imageio-ffmpeg
-
-# install custom nodes using comfy-cli
-RUN comfy node install comfyui-manager comfyui-kjnodes comfyui-videohelpersuite 
-
-RUN git clone git clone https://github.com/Lightricks/ComfyUI-LTXVideo.git /workspace/ComfyUI/custom_nodes/ComfyUI-LTXVideo && pip install -r /workspace/ComfyUI/custom_nodes/ComfyUI-LTXVideo/requirements.txt
+RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /workspace/ComfyUI/custom_nodes/ComfyUI-Manager \
+ && pip install -r /workspace/ComfyUI/custom_nodes/ComfyUI-Manager/requirements.txt \
+ && git clone https://github.com/kijai/ComfyUI-KJNodes.git /workspace/ComfyUI/custom_nodes/ComfyUI-KJNodes \
+ && pip install -r /workspace/ComfyUI/custom_nodes/ComfyUI-KJNodes/requirements.txt \
+ && git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git /workspace/ComfyUI/custom_nodes/ComfyUI-VideoHelperSuite \
+ && pip install -r /workspace/ComfyUI/custom_nodes/ComfyUI-VideoHelperSuite/requirements.txt \
+ && git clone https://github.com/Lightricks/ComfyUI-LTXVideo.git /workspace/ComfyUI/custom_nodes/ComfyUI-LTXVideo \
+ && pip install -r /workspace/ComfyUI/custom_nodes/ComfyUI-LTXVideo/requirements.txt
 
 # download models using comfy-cli
 # the "--filename" is what you use in your ComfyUI workflow
