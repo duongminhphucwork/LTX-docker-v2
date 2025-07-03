@@ -4,8 +4,7 @@ FROM runpod/worker-comfyui:5.2.0-base
 # install custom nodes using comfy-cli
 RUN comfy-node-install comfyui-kjnodes comfyui-videohelpersuite
 
-RUN apt-get update && apt-get install -y git
-
+WORKDIR /comfyui/custom_nodes
 RUN git clone https://github.com/Lightricks/ComfyUI-LTXVideo.git
 
 RUN pip install --no-cache-dir -r /comfyui/custom_nodes/ComfyUI-LTXVideo/requirements.txt
